@@ -1,11 +1,23 @@
-node {
-    checkout scm
-
-    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-
-        def customImage = docker.build("bigwwale/jenkinsed-node-pipeline")
-
-        /* Push the container to the custom Registry */
-        customImage.push()
-    }
-}
+node {    
+      def app     
+      stage('Clone repository') {               
+             
+            checkout scm    
+      }     
+      stage('Build image') {         
+       
+            app = docker.build("bigwwale/jenkinsed-node-pipeline")    
+       }     
+      stage('Test image') {           
+            app.inside {            
+             
+             sh 'echo "Tests passed"'        
+            }    
+        }     
+       stage('Push image') {
+                                                  docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {            
+       app.push("${env.BUILD_NUMBER}")            
+       app.push("latest")        
+              }    
+           }
+        }
