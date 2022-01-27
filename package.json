@@ -1,0 +1,13 @@
+{
+    "name": "jenkinsed-node-pipeline",
+    "version": "1.0.0",
+    "description": "Jenkins pipeline build a Docker image for Node.js",
+    "author": "Omar Allouache",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+    }
+  }
