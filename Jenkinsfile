@@ -1,11 +1,11 @@
 node {
     checkout scm
 
-    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
+    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 
-        def customImage = docker.build("bigwwale/jenkinsed-node-pipeline")
+        def customimage = docker.build("bigwwale/nodejenkins")
 
         /* Push the container to the custom Registry */
-        customImage.push()
+        customimage.push()
     }
 }
